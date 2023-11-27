@@ -43,6 +43,7 @@ img {
     align-items: center;
     gap: 31px;
     padding-top: 44px;
+    position: relative;
 }
 
 .label {
@@ -61,6 +62,14 @@ img {
     line-height: normal;
 }
 
+.label_surname_2 {
+    color: #4200FF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
 .label_number {
     color: #000;
     font-size: 14px;
@@ -69,8 +78,24 @@ img {
     line-height: normal;
 }
 
+.label_number_2 {
+    color: #4200FF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
 .label_moms_name {
     color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.label_moms_name_2 {
+    color: #4200FF;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -117,6 +142,19 @@ img {
     margin-top: 6px;
 }
 
+.second_input_2 {
+    display: flex;
+    padding: 20px 12px;
+    border-radius: 4px;
+    border: 2px solid #543FD3;
+    background: #FFF;
+    width: 301px;
+    height: 65px;
+    font-size: 16px;
+    outline: none;
+    margin-top: 6px;
+}
+
 .third_input {
     display: flex;
     padding: 20px 12px;
@@ -143,11 +181,37 @@ img {
     margin-top: 6px;
 }
 
+.fourth_input_2 {
+    display: flex;
+    padding: 20px 12px;
+    border-radius: 4px;
+    border: 2px solid #543FD3;
+    background: #FFF;
+    width: 301px;
+    height: 65px;
+    font-size: 16px;
+    outline: none;
+    margin-top: 6px;
+}
+
 .fifth_input {
     display: flex;
     padding: 20px 12px;
     border-radius: 4px;
     border: 1px solid var(--Grey-AA-Large, #949494);
+    background: #FFF;
+    width: 301px;
+    height: 65px;
+    font-size: 16px;
+    outline: none;
+    margin-top: 6px;
+}
+
+.fifth_input_2 {
+    display: flex;
+    padding: 20px 12px;
+    border-radius: 4px;
+    border: 2px solid #543FD3;
     background: #FFF;
     width: 301px;
     height: 65px;
@@ -196,13 +260,16 @@ img {
 }
 
 .btn_center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 27px;
+    display: block;
+
 }
 
 .btn {
+    position: absolute;
+    top: 950px;
+    left: 425px;
+    right: 0;
+    bottom: 0;
     display: flex;
     width: 277px;
     height: 59px;
@@ -223,13 +290,26 @@ img {
 
 .btn:hover {
     background-color: blue;
-    color: red;;
+    color: red;
     transform: scale(1.05);
 }
 
 .btn:active {
-    background-color: yellow;
+    background-color: red;
+    color: white;
     transform: scale(1);
     box-shadow: 0 3px 8px rgba(0, 0, 0.622);
     border: none;
+}
+
+.btn:focus {
+    border: 2px solid blue;
+}
+
+.error {
+    border: 2px solid red !important;
+}
+
+.blue-input {
+    border: 2px solid #949494;
 }
