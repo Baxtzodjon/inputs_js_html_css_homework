@@ -28,7 +28,7 @@ let redInput = document.querySelector('.sixth_input');
 let surName = document.querySelector('.second_input');
 let phoneNumber = document.querySelector('.fourth_input');
 let favCar = document.querySelector('#favourite_car');
- 
+
 form.onsubmit = (e) => {
     e.preventDefault();
 
@@ -51,6 +51,9 @@ form.onsubmit = (e) => {
                     paragrafs[i].innerHTML = 'Please enter your email adress';
                     paragrafs[i].style.color = 'red';
                 }
+                for (let i = 0; i < labels.length; i++) {
+                    labels[i].style.color = 'red';
+                }
             }
         } else {
             inps[key].classList.remove('error');
@@ -59,25 +62,10 @@ form.onsubmit = (e) => {
                     paragrafs[i].innerHTML = 'Need to fill';
                     paragrafs[i].style.color = 'black';
                 }
-            }
-        }
-    }
-
-    for (let key in user) {
-        if (user[key].length === 0) {
-            errorNames.push(key);
-            inps[key].classList.add('error');
-            if (key === 'email') {
-                for (let i = 0; i < labels.length; i++) {
-                    labels[i].style.color = 'red';
-                }
-            }
-        } else {
-            inps[key].classList.remove('error');
-            if (key === 'email') {
                 for (let i = 0; i < labels.length; i++) {
                     labels[i].style.color = 'black';
                 }
+                inps[key].classList.remove('error');
             }
         }
     }
@@ -94,7 +82,7 @@ form.onsubmit = (e) => {
     let surNameValue = surName.value.trim();
     let phoneValue = phoneNumber.value.trim();
     let favCarValue = favCar.value.trim();
-   
+
 
     if (blueInputValue === '') {
         blueInput.classList.remove('error');
@@ -122,13 +110,7 @@ form.onsubmit = (e) => {
 
     if (favCarValue === '') {
         favCar.classList.remove('error')
-    }  else {
-        favCar.classList.remove('error')
-    }
-    
-    if (blueInput.classList.contains('error') && blueInput.classList.contains('colorful-input')) {
-        blueInput.style.borderColor = 'yellow';
     } else {
-        blueInput.style.borderColor = '';
+        favCar.classList.remove('error')
     }
 }
