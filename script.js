@@ -20,97 +20,78 @@
 
 
 let form = document.forms.registration
-let inps = form.getElementsByTagName('input') // getElementsByTagName() Element. getElementsByTagName() метод возвращает живую коллекцию элементов HTMLCollection , учитывая имя тэга.
-let paragrafs = document.querySelectorAll('.p_small_text')
-let labels = document.querySelectorAll('label')
-let blueInput = document.querySelector('.fifth_input');
-let redInput = document.querySelector('.sixth_input');
-let surName = document.querySelector('.second_input');
-let phoneNumber = document.querySelector('.fourth_input');
-let favCar = document.querySelector('#favourite_car');
+let inps = document.querySelectorAll('input')
+// let inps = form.getElementsByTagName('input') // getElementsByTagName() Element. getElementsByTagName() метод возвращает живую коллекцию элементов HTMLCollection , учитывая имя тэга.
+
+let patters = {
+    name: /^[a-z ,.'-]+$/i,
+    surname: /^[a-z ,.'-]+$/i,
+    email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+    phone: /^\+998([- ])?(90|91|93|94|95|98|99|33|97|71|88)([- ])?(\d{3})([- ])?(\d{2})([- ])?(\d{2})$/,
+    motherName: /^[a-z ,.'-]+$/i,
+    fatherName: /^[a-z ,.'-]+$/i,
+    age: /^\S[0-9]{0,3}$/,
+    about: /^[a-z ,.'-]+$/i,
+    js: /^[a-z ,.'-]+$/i,
+    html: /^[a-z ,.'-]+$/i,
+    css: /^[a-z ,.'-]+$/i,
+    fav_car: /^[a-z ,.'-]+$/i
+}
+
+inps.forEach(inp => {
+    let parent = inp.parentElement
+    let span_error = inp.nextElementSibling
+
+
+    inp.onkeyup = () => {
+        if (patters[inp.name].test(inp.value)) {
+            parent.classList.remove('error-field')
+            span_error.innerHTML = ""
+        } else {
+            parent.classList.add('error-field')
+            span_error.innerHTML = `Invalid data entered`
+        }
+    }
+})
 
 form.onsubmit = (e) => {
     e.preventDefault();
+    let isError = false
 
-    let user = {}
 
+    inps.forEach(inp => {
+        let parent = inp.parentElement
+        let p_error = inp.nextElementSibling
+
+        parent.classList.remove('error-field')
+        p_error.innerHTML = ""
+
+        if (inp.value.length === 0 && parent.classList.contains('required')) {
+            parent.classList.add('error-field')
+            p_error.innerHTML = 'Please enter your ' + inp.id
+            isError = true
+        }
+    })
+
+
+    if (isError) {
+        alert('Error')
+    } else {
+        submit()
+    }
+}
+
+function submit() {
     let fm = new FormData(form)
 
-    let errorNames = []
+    let user = {
+        // name: fm.get('name'),
+        // surname: fm.get('surname')
+    }
 
     fm.forEach((val, key) => {
         user[key] = val
     })
 
-    for (let key in user) { // for in это цикл по объекту а for of цикл по массиву
-        if (user[key].length === 0) {
-            errorNames.push(key);
-            inps[key].classList.add('error');
-            if (key === 'email') {
-                for (let i = 0; i < paragrafs.length; i++) {
-                    paragrafs[i].innerHTML = 'Please enter your email adress';
-                    paragrafs[i].style.color = 'red';
-                }
-                for (let i = 0; i < labels.length; i++) {
-                    labels[i].style.color = 'red';
-                }
-            }
-        } else {
-            inps[key].classList.remove('error');
-            if (key === 'email') {
-                for (let i = 0; i < paragrafs.length; i++) {
-                    paragrafs[i].innerHTML = 'Need to fill';
-                    paragrafs[i].style.color = 'black';
-                }
-                for (let i = 0; i < labels.length; i++) {
-                    labels[i].style.color = 'black';
-                }
-                inps[key].classList.remove('error');
-            }
-        }
-    }
-
-    if (errorNames.length > 0) {
-        alert('Error')
-        console.log(errorNames);
-    } else {
-        console.log(user);
-    }
-
-    let blueInputValue = blueInput.value.trim();
-    let redInputValue = redInput.value.trim();
-    let surNameValue = surName.value.trim();
-    let phoneValue = phoneNumber.value.trim();
-    let favCarValue = favCar.value.trim();
-
-
-    if (blueInputValue === '') {
-        blueInput.classList.remove('error');
-    } else {
-        blueInput.classList.remove('error');
-    }
-
-    if (redInputValue === '') {
-        redInput.classList.remove('error');
-    } else {
-        redInput.classList.remove('error');
-    }
-
-    if (surNameValue === '') {
-        surName.classList.remove('error');
-    } else {
-        surName.classList.remove('error');
-    }
-
-    if (phoneValue === '') {
-        phone.classList.remove('error');
-    } else {
-        phone.classList.remove('error');
-    }
-
-    if (favCarValue === '') {
-        favCar.classList.remove('error')
-    } else {
-        favCar.classList.remove('error')
-    }
+    console.log(user);
 }

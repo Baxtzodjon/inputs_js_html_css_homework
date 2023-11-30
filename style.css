@@ -41,9 +41,30 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 31px;
+    gap: 50px;
     padding-top: 44px;
     position: relative;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.icon::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background-image: url(./img/warning.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 80px;
+    right: -25px;
+    bottom: 0px;
+    opacity: 0;
+    transition: .5s ease;
 }
 
 .label {
@@ -261,12 +282,11 @@ img {
 
 .btn_center {
     display: block;
-
 }
 
 .btn {
     position: absolute;
-    top: 950px;
+    top: 975px;
     left: 425px;
     right: 0;
     bottom: 0;
@@ -276,7 +296,6 @@ img {
     padding: 20px 12px;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
     border-radius: 4px;
     border: 2px solid #4200FF;
     background: #4200FF;
@@ -286,6 +305,7 @@ img {
     font-weight: 400;
     line-height: normal;
     margin-left: 45px;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -312,4 +332,23 @@ img {
 
 .blue-input {
     border: 2px solid #949494;
+}
+
+.error-field input,
+.error-field .p_small_text,
+.error-field label {
+    color: red !important;
+    border-color: red !important;
+}
+
+form .required input {
+    border-color: blue;
+}
+
+.error-field::after {
+    opacity: 1;
+}
+
+.padding {
+    padding-top: 35px;
 }
