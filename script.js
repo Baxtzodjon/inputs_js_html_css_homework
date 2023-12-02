@@ -21,7 +21,9 @@
 
 let form = document.forms.registration
 let inps = document.querySelectorAll('input')
-// let inps = form.getElementsByTagName('input') // getElementsByTagName() Element. getElementsByTagName() метод возвращает живую коллекцию элементов HTMLCollection , учитывая имя тэга.
+// let inps = form.getElementsByTagName('input') // getElementsByTagName() метод возвращает живую коллекцию элементов HTMLCollection , учитывая имя тэга.
+let p_counter = document.querySelector('.counter')
+let p_counter_success = document.querySelector('.counter_success')
 
 let patters = {
     name: /^[a-z ,.'-]+$/i,
@@ -39,8 +41,8 @@ let patters = {
 }
 
 inps.forEach(inp => {
-    let parent = inp.parentElement
-    let span_error = inp.nextElementSibling
+    let parent = inp.parentElement // родительский элемент
+    let span_error = inp.nextElementSibling // метод nextElementSibling - это тот который стоит после нашего инпута и Sibling - братья и сестры,previousElementSibling - это тот который стоит до него
 
 
     inp.onkeyup = () => {
@@ -56,25 +58,31 @@ inps.forEach(inp => {
 
 form.onsubmit = (e) => {
     e.preventDefault();
-    let isError = false
 
+    let error_counter = 0
+    let success_counter = 0
 
     inps.forEach(inp => {
         let parent = inp.parentElement
         let p_error = inp.nextElementSibling
 
-        parent.classList.remove('error-field')
-        p_error.innerHTML = ""
 
-        if (inp.value.length === 0 && parent.classList.contains('required')) {
+        if (inp.value.length === 0 && parent.classList.contains('required') || parent.classList.contains('error-field')) {
             parent.classList.add('error-field')
             p_error.innerHTML = 'Please enter your ' + inp.id
-            isError = true
+            error_counter++
+        } else {
+            parent.classList.remove('error-field')
+            p_error.innerHTML = ""
+            success_counter++
         }
     })
 
-
-    if (isError) {
+    let correct_inputs = success_counter - error_counter
+    p_counter.innerHTML = `Error: ${error_counter}/12`
+    p_counter_success.innerHTML = `Success: ${correct_inputs}/12`
+    
+    if (error_counter > 0) {
         alert('Error')
     } else {
         submit()
@@ -94,4 +102,5 @@ function submit() {
     })
 
     console.log(user);
+    form.reset() // reset - заново делает злоумышленники не может спанить ваш сайт
 }
